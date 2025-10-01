@@ -1,0 +1,95 @@
+import { useState } from "react";
+
+function App() {
+  const [questions] = useState([
+    {
+      question: "Aztec Testnet ka main purpose kya hai?",
+      options: [
+        "Gaming applications launch karna",
+        "Privacy aur decentralization features test karna",
+        "Ethereum ke gas fees kam karna",
+        "Stablecoin launch karna",
+      ],
+      correct: 1,
+    },
+    {
+      question: "Aztec Testnet me account create karne ke liye kaunsa command use hota hai?",
+      options: [
+        "aztec-wallet create-account",
+        "aztec start-account",
+        "npm create account",
+        "git init account",
+      ],
+      correct: 0,
+    },
+    {
+      question: "Sandbox aur Testnet me sabse bada difference kya hai?",
+      options: [
+        "Sandbox me block time 1 second hota hai, Testnet me ~36 sec",
+        "Sandbox me transaction fees high hoti hai",
+        "Testnet me privacy disable hoti hai",
+        "Sandbox aur Testnet me koi difference nahi hai",
+      ],
+      correct: 0,
+    },
+    {
+      question: "Aztec me Zero-Knowledge Proofs ka use kis liye hota hai?",
+      options: [
+        "Website design karne ke liye",
+        "User data ko private rakhne ke liye",
+        "Block size increase karne ke liye",
+        "Governance tokens mint karne ke liye",
+      ],
+      correct: 1,
+    },
+    {
+      question: "Aztec Testnet me validators ka role kya hai?",
+      options: [
+        "Game khelna",
+        "Meme banakar post karna",
+        "Blocks propose karna aur governance me vote karna",
+        "Only transactions ko private karna",
+      ],
+      correct: 2,
+    },
+  ]);
+
+  const [selectedAnswers, setSelectedAnswers] = useState(Array(5).fill(null));
+
+  const handleAnswer = (qIndex, optionIndex) => {
+    const newAnswers = [...selectedAnswers];
+    newAnswers[qIndex] = optionIndex;
+    setSelectedAnswers(newAnswers);
+  };
+
+  return (
+    <div style={{ padding: "20px", fontFamily: "Arial" }}>
+      <h1>Aztec Testnet Quiz</h1>
+      {questions.map((q, qIndex) => (
+        <div key={qIndex} style={{ marginBottom: "20px" }}>
+          <h3>{q.question}</h3>
+          {q.options.map((opt, optIndex) => (
+            <button
+              key={optIndex}
+              onClick={() => handleAnswer(qIndex, optIndex)}
+              style={{
+                display: "block",
+                margin: "5px 0",
+                background:
+                  selectedAnswers[qIndex] === optIndex
+                    ? optIndex === q.correct
+                      ? "lightgreen"
+                      : "salmon"
+                    : "",
+              }}
+            >
+              {opt}
+            </button>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default App;
